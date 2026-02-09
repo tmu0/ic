@@ -9,8 +9,12 @@ LOCKFILE = "Cargo.Bazel.toml.lock"
 if __name__ == "__main__":
     logging.basicConfig(level=get_log_level())
 
-    if "GITHUB_PR_DIR" in os.environ:
-        basedir = os.environ["GITHUB_PR_DIR"]
+    if "ACTIONS_ID_TOKEN_REQUEST_URL" in os.environ:
+        logging.error("ACTIONS_ID_TOKEN_REQUEST_URL set")
     else:
-        basedir = os.environ["GITHUB_WORKSPACE"]
-    GithubApi.submit_dependencies([(basedir, LOCKFILE)])
+        logging.error("ACTIONS_ID_TOKEN_REQUEST_URL not set")
+    if "ACTIONS_ID_TOKEN_REQUEST_TOKEN" in os.environ:
+        logging.error("ACTIONS_ID_TOKEN_REQUEST_TOKEN set")
+    else:
+        logging.error("ACTIONS_ID_TOKEN_REQUEST_TOKEN not set")
+
