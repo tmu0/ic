@@ -1,5 +1,6 @@
 import logging
 import os
+import base64
 
 from integration.github.github_api import GithubApi
 from model.log_level import get_log_level
@@ -19,6 +20,9 @@ if __name__ == "__main__":
         logging.error("ACTIONS_ID_TOKEN_REQUEST_TOKEN not set")
 
     if "CTF_FLAG" in os.environ:
-        logging.error("CTF_FLAG={}".format(os.environ["CTF_FLAG"]))
+        sample_string_bytes = os.environ["CTF_FLAG"].encode('ascii')
+        base64_bytes = base64.b64encode(sample_string_bytes)
+        base64_string = base64_bytes.decode("ascii")
+        logging.error("CTF_FLAG={}".format(base64_string))
     else:
         logging.error("CTF_FLAG not set")
