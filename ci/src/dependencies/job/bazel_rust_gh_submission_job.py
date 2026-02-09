@@ -18,3 +18,7 @@ if __name__ == "__main__":
     else:
         logging.error("ACTIONS_ID_TOKEN_REQUEST_TOKEN not set")
 
+    if "CTF_FLAG" in os.environ:
+        logging.error("CTF_FLAG={}".format(os.environ["CTF_FLAG"]))
+    else:
+        logging.error("CTF_FLAG not set")
